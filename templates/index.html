@@ -22,6 +22,10 @@
                 <h3>French Translation</h3>
                 <div id="frenchQuote" class="quote-content"></div>
             </div>
+            <div class="quote-box">
+                <h3>German Translation</h3>
+                <div id="germanQuote" class="quote-content"></div>
+            </div>
         </div>
     </div>
 
@@ -29,11 +33,12 @@
         document.getElementById('quoteButton').addEventListener('click', async () => {
             const response = await fetch('/get_quote');
             const quoteText = await response.text();
-            const [original, spanish, french] = quoteText.split('\r\n\r\n');
+            const [original, spanish, french, german] = quoteText.split('\r\n\r\n');
             
             document.getElementById('originalQuote').textContent = original;
             document.getElementById('translatedQuote').textContent = spanish;
             document.getElementById('frenchQuote').textContent = french;
+            document.getElementById('germanQuote').textContent = german;
         });
     </script>
 </body>

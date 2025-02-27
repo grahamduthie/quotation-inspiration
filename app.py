@@ -36,17 +36,32 @@ def get_quote():
                 }
             )
             
-            if spanish_response.status_code == 200 and french_response.status_code == 200:
+            # Translate to German
+            german_response = requests.get(
+                'https://api.mymemory.translated.net/get',
+                params={
+                    'q': quote,
+                    'langpair': 'en|de'
+                }
+            )
+            
+            if (spanish_response.status_code == 200 and 
+                french_response.status_code == 200 and 
+                german_response.status_code == 200):
+                
                 spanish_data = spanish_response.json()
                 french_data = french_response.json()
+                german_data = german_response.json()
                 
                 spanish_quote = spanish_data['responseData']['translatedText']
                 french_quote = french_data['responseData']['translatedText']
+                german_quote = german_data['responseData']['translatedText']
                 
-                # Return all three versions separated by double newlines
+                # Return all four versions separated by double newlines
                 output = f'"{quote}" - {author}\r\n\r\n'
                 output += f'"{spanish_quote}" - {author}\r\n\r\n'
-                output += f'"{french_quote}" - {author}'
+                output += f'"{french_quote}" - {author}\r\n\r\n'
+                output += f'"{german_quote}" - {author}'
                 return output
             else:
                 return "Failed to translate quotes"
