@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirational Quotes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <button id="quoteButton">Get Inspiration</button>
+        <div class="quote-boxes">
+            <div class="quote-box">
+                <h3>Quote</h3>
+                <div id="originalQuote" class="quote-content"></div>
+            </div>
+            <div class="quote-box">
+                <h3>Spanish Translation</h3>
+                <div id="translatedQuote" class="quote-content"></div>
+            </div>
+            <div class="quote-box">
+                <h3>French Translation</h3>
+                <div id="frenchQuote" class="quote-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('quoteButton').addEventListener('click', async () => {
+            const response = await fetch('/get_quote');
+            const quoteText = await response.text();
+            const [original, spanish, french] = quoteText.split('\r\n\r\n');
+            
+            document.getElementById('originalQuote').textContent = original;
+            document.getElementById('translatedQuote').textContent = spanish;
+            document.getElementById('frenchQuote').textContent = french;
+        });
+    </script>
+</body>
+</html> 
