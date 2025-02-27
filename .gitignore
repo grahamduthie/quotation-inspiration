@@ -1,0 +1,32 @@
+# Ignore the virtual environment folder
+venv/
+env/
+.vscode/
+.cursor/
+.idea/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore distribution and build folders
+dist/
+build/
+*.egg-info/
